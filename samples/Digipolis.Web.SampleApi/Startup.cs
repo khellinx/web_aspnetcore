@@ -1,19 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using AutoMapper;
+using Digipolis.Errors;
 using Digipolis.Web;
+using Digipolis.Web.Api.ApiExplorer;
 using Digipolis.Web.SampleApi.Configuration;
-using Digipolis.Web.Startup;
-using Swashbuckle.Swagger.Model;
-using AutoMapper;
 using Digipolis.Web.SampleApi.Data;
 using Digipolis.Web.SampleApi.Logic;
+using Digipolis.Web.Startup;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
+using Swashbuckle.Swagger.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Digipolis.Web.SampleApi
 {
@@ -42,6 +47,14 @@ namespace Digipolis.Web.SampleApi
             });
 
             services.AddGlobalErrorHandling<ApiExceptionMapper>();
+
+            // Add default response types
+            services.AddDefaultResponsesApiDescriptionProvider();
+
+            // Add other description providers
+            services.AddApiDescriptionProvider<LowerCaseRelativePathApiDescriptionProvider>(10);
+            services.AddApiDescriptionProvider<LowerCaseQueryParametersApiDescriptionProvider>(11);
+            services.AddApiDescriptionProvider<ConsumesJsonApiDescriptionProvider>(30);
 
             // Add Swagger extensions
             services.AddSwaggerGen<ApiExtensionSwaggerSettings>(x =>

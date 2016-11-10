@@ -49,5 +49,19 @@ namespace Digipolis.Web
         {
             return char.ToUpperInvariant(input[0]).ToString();
         }
+
+        /// <summary>
+        /// Returns a value indicating whether a specified substring occurs within this string. A parameter specifies the culture, case and sort rules used in the comparison.
+        /// </summary>
+        /// <param name="source">The string to check.</param>
+        /// <param name="value">The string to seek.</param>
+        /// <param name="comp">One of the enumeration values that specifies how the strings will be compared.</param>
+        /// <returns></returns>
+        public static bool Contains(this string source, string value, StringComparison comparisonType)
+        {
+            if (string.IsNullOrEmpty(value)) return true;
+
+            return source.IndexOf(value, comparisonType) >= 0;
+        }
     }
 }

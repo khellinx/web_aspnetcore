@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Digipolis.Web.Api.Models;
 using Digipolis.Web.Swagger;
+using Digipolis.Web.Api.ApiExplorer;
 
 namespace Digipolis.Web.SampleApi.Controllers
 {
@@ -31,7 +32,7 @@ namespace Digipolis.Web.SampleApi.Controllers
         /// <param name="queryOptions">Query options from uri</param>
         /// <returns>An array of value objects</returns>
         [HttpGet()]
-        [ProducesResponseType(typeof(PagedResult<ValueDto>), 200)]
+        [ProducesDefaultResponses(200, SuccessResponseType = typeof(PagedResult<ValueDto>))]
         [AllowAnonymous]
         [Versions(Versions.V1, Versions.V2)]
         public IActionResult Get([FromQuery]PageOptions queryOptions)

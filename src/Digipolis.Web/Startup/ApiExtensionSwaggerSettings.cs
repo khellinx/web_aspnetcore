@@ -10,7 +10,6 @@ namespace Digipolis.Web.Startup
         protected override void Configuration(SwaggerGenOptions options)
         {
             options.DescribeAllEnumsAsStrings();
-            options.DocumentFilter<EndPointPathsAndParamsToLower>();
         }
     }
 }
