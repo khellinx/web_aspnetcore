@@ -19,7 +19,7 @@ namespace Digipolis.Web
         /// <param name="services"></param>
         /// <param name="setupAction"></param>
         /// <returns></returns>
-        public static IServiceCollection ConfigureSwaggerGen<TSwaggerSettings>(this IServiceCollection services, Action<SwaggerGenOptions> setupAction = null) where TSwaggerSettings : SwaggerSettings<SwaggerResponseDefinitions>, new()
+        public static IServiceCollection ConfigureSwaggerGen<TSwaggerSettings>(this IServiceCollection services, Action<SwaggerGenOptions> setupAction = null) where TSwaggerSettings : SwaggerSettings<SwaggerResponseCodeDescriptions>, new()
         {
             var settings = new TSwaggerSettings();
             services.Configure<SwaggerGenOptions>(settings.Configure);
@@ -33,7 +33,7 @@ namespace Digipolis.Web
         /// <typeparam name="TSwaggerSettings"></typeparam>
         /// <param name="services"></param>
         /// <param name="setupAction"></param>
-        public static void AddSwaggerGen<TSwaggerSettings>(this IServiceCollection services, Action<SwaggerGenOptions> setupAction = null) where TSwaggerSettings : SwaggerSettings<SwaggerResponseDefinitions>, new()
+        public static void AddSwaggerGen<TSwaggerSettings>(this IServiceCollection services, Action<SwaggerGenOptions> setupAction = null) where TSwaggerSettings : SwaggerSettings<SwaggerResponseCodeDescriptions>, new()
         {
             services.AddSwaggerGen();
             services.ConfigureSwaggerGen<TSwaggerSettings>(setupAction);

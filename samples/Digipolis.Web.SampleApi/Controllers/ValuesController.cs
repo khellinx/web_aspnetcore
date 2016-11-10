@@ -84,7 +84,6 @@ namespace Digipolis.Web.SampleApi.Controllers
         [HttpPut("{id}")]
         [ValidateModelState]
         [Versions(Versions.V1, Versions.V2)]
-        [ExcludeSwaggerResonse((int)HttpStatusCode.NotFound)]
         public IActionResult Put(int id, [FromBody, Required] ValueDto value)
         {
             value = _valueLogic.Update(id, value);
