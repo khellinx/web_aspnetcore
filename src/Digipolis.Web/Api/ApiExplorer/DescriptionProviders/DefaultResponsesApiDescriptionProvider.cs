@@ -27,7 +27,7 @@ namespace Digipolis.Web.Api.ApiExplorer
         {
             foreach (var actionDescription in context.Results)
             {
-                var defaultResultTypesAttribute = actionDescription.ActionDescriptor.GetCustomControllerAttribute<ProducesDefaultResponsesAttribute>();
+                var defaultResultTypesAttribute = actionDescription.ActionDescriptor.GetCustomControllerActionAttribute<ProducesDefaultResponsesAttribute>();
 
                 // Add the success code
                 if (defaultResultTypesAttribute != null)
@@ -38,7 +38,7 @@ namespace Digipolis.Web.Api.ApiExplorer
                 // Add default codes
                 foreach (var responseType in _options.DefaultResponseTypes)
                 {
-                    if (ApiDescriptionFulfillsAllFilters(actionDescription, responseType.Filters) && (defaultResultTypesAttribute != null || responseType.AddToDescriptionsWithoutDefaultAttribute))
+                    if ((defaultResultTypesAttribute != null || responseType.AddToDescriptionsWithoutDefaultAttribute) && ApiDescriptionFulfillsAllFilters(actionDescription, responseType.Filters))
                     {
                         actionDescription.AddSupportedResponseTypeIfNotExists(responseType.ResponseType);
                     }

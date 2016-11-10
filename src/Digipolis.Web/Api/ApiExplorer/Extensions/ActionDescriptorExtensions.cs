@@ -10,7 +10,18 @@ namespace Digipolis.Web.Api.ApiExplorer
 {
     public static class ActionDescriptorExtensions
     {
-        public static TAttribute GetCustomControllerAttribute<TAttribute>(this ActionDescriptor actionDescriptor)
+        public static bool HasCustomControllerActionAttribute<TAttribute>(this ActionDescriptor actionDescriptor)
+            where TAttribute : Attribute
+        {
+            var controllerActionDescriptor = actionDescriptor as ControllerActionDescriptor;
+            if (controllerActionDescriptor == null) return false;
+
+            var result = controllerActionDescriptor.MethodInfo.CustomAttributes.Where(x => x.AttributeType == typeof(TAttribute)).Any();
+
+            return result;
+        }
+
+        public static TAttribute GetCustomControllerActionAttribute<TAttribute>(this ActionDescriptor actionDescriptor)
             where TAttribute : Attribute
         {
             var controllerActionDescriptor = actionDescriptor as ControllerActionDescriptor;

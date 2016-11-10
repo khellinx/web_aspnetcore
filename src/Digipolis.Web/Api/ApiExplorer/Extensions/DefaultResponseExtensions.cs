@@ -71,12 +71,27 @@ namespace Digipolis.Web.Api.ApiExplorer
         }
 
         /// <summary>
+        /// Defines a filter for DefaultResponseType that the controller action should have an attribute of type <typeparamref name="TAttribute"/> in order to be added to the api description.
+        /// </summary>
+        /// <typeparam name="TAttribute">Type of the attribute, with a constraint on type Attribute</typeparam>
+        /// <param name="defaultResponseType">The original default response type.</param>
+        /// <returns>The original default response type with an added filter.</returns>
+        public static DefaultResponseType WhenHasAttribute<TAttribute>(this DefaultResponseType defaultResponseType)
+            where TAttribute : Attribute
+        {
+            defaultResponseType.When(apiDesc => apiDesc.ActionDescriptor.HasCustomControllerActionAttribute<TAttribute>());
+
+            return defaultResponseType;
+        }
+
+        /// <summary>
         /// Defines a filter for DefaultResponseType that a route parameter has to be present in order to be added to the api description.
         /// </summary>
         /// <param name="defaultResponseType">The original default response type.</param>
-        /// <param name="paramNameEquals">The name of the route parameter should equal the provided value. When this value is not null, the paramNameContains value will be ignored. Comparison is case insensitive.</param>
-        /// <param name="paramNameContains">The name of the route parameter should contain the provided value. This value will be ignored if paramNameEquals is not null. Comparison is case insensitive.</param>
+        /// <param name="paramNameEquals">The name of the route parameter should equal the provided value. Comparison is case insensitive. Cannot be used in combination with <paramref name="paramNameContains"/>.</param>
+        /// <param name="paramNameContains">The name of the route parameter should contain the provided value. Comparison is case insensitive. Cannot be used in combination with <paramref name="paramNameEquals"/>.</param>
         /// <returns>The original default response type with an added filter.</returns>
+        /// <exception cref="ArgumentException">Thrown when both the <paramref name="paramNameEquals"/> and <paramref name="paramNameContains"/> are provided.</exception>
         public static DefaultResponseType WhenHasRouteParameter(this DefaultResponseType defaultResponseType, string paramNameEquals = null, string paramNameContains = null)
         {
             if (paramNameContains != null && paramNameEquals != null)
@@ -101,7 +116,7 @@ namespace Digipolis.Web.Api.ApiExplorer
         }
 
         /// <summary>
-        /// Defines a filter with a specific delegate function. If the filter passes, the response type will be added to the api description.
+        /// Defines a filter with a specific delegate function. If the <paramref name="filter"/> function returns true, the response type will be added to the api description.
         /// </summary>
         /// <param name="defaultResponseType">The original default response type.</param>
         /// <param name="filter">The specific delegate function that has to return true in order to be added to the api description.</param>

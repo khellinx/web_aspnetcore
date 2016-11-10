@@ -1,4 +1,5 @@
 ﻿using Digipolis.Errors;
+using Digipolis.Web.Api;
 using Digipolis.Web.Api.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,14 +34,14 @@ namespace Digipolis.Web.Startup
                     // All responses produce json
                     options.AddDefaultResponseFormat("application/json");
 
+                    // 400 - Bad Request
+                    options.AddDefaultResponseType((int)HttpStatusCode.BadRequest, typeof(Error)).ToPost();
+                    options.AddDefaultResponseType((int)HttpStatusCode.BadRequest, typeof(Error)).ToPut();
+
                     // 404 - Not Found
                     options.AddDefaultResponseType((int)HttpStatusCode.NotFound, typeof(Error)).ToGet().WhenHasRouteParameter(paramNameContains: "id");
                     options.AddDefaultResponseType((int)HttpStatusCode.NotFound, typeof(Error)).ToPut().WhenHasRouteParameter(paramNameContains: "id");
                     options.AddDefaultResponseType((int)HttpStatusCode.NotFound, typeof(Error)).ToDelete().WhenHasRouteParameter(paramNameContains: "id");
-
-                    // 400 - Bad Request
-                    options.AddDefaultResponseType((int)HttpStatusCode.BadRequest, typeof(Error)).ToPost();
-                    options.AddDefaultResponseType((int)HttpStatusCode.BadRequest, typeof(Error)).ToPut();
 
                     // 500 - Internal server Error
                     options.AddDefaultResponseType((int)HttpStatusCode.InternalServerError, typeof(Error));
