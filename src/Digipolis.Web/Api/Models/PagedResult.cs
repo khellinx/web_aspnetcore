@@ -5,19 +5,23 @@ using Newtonsoft.Json;
 
 namespace Digipolis.Web.Api
 {
-    public class PagedResult<T> where T : class, new()
+    public class PagedResult<T>
     {
         [JsonProperty(PropertyName = "_links")]
         public PagedResultLinks Links { get; set; }
 
-        public IEnumerable<T> Data { get; set; }
+        [JsonProperty(PropertyName = "_embedded")]
+        public PagedResultEmbedded<T> Embedded { get; set; }
 
         [JsonProperty(PropertyName = "_page")]
         public Page Page { get; set; }
 
         public PagedResult(int page, int pageSize, int totalElements, IEnumerable<T> data)
         {
-            Data = data ?? new List<T>();
+            Embedded = new PagedResultEmbedded<T>()
+            {
+                Data = data ?? new List<T>()
+            };
             Page = new Page
             {
                 Number = page,

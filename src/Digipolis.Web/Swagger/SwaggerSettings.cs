@@ -13,7 +13,6 @@ namespace Digipolis.Web.Swagger
             if (File.Exists(xmlPath)) options.IncludeXmlComments(xmlPath);
             options.OperationFilter<AddFileUploadParams>();
             options.DocumentFilter<SetVersionInPaths>();
-            options.SchemaFilter<PagedResultSchemaFilter>();
             Configuration(options);
         }
 
