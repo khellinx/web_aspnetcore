@@ -21,3 +21,12 @@
 ## 2.0.3
 
 - fixed namespace in WebAppBuilderExtensions
+
+## 3.0.0
+
+- ???
+
+## 3.1.0
+
+- Removed some Swagger functionality and replaced it with Api Description Providers, which is built-in functionality of MVC.
+- Updated PagedResult model so that custom Swagger filters are not required.

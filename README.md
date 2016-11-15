@@ -44,7 +44,7 @@ To add the toolbox to a project, you add the package to the project.json :
 
 ``` json 
 "dependencies": {
-    "Digipolis.Web":  "3.0.0"
+    "Digipolis.Web":  "3.1.0"
  }
 ``` 
 
@@ -235,17 +235,6 @@ public class AdditionalApiExtensionSwaggerSettings : ApiExtensionSwaggerSettings
 Then register Swagger with this class
 ``` csharp 
 services.AddSwaggerGen<AdditionalApiExtensionSwaggerSettings>();
-```
-
-### Exclude certain responses from Swagger
-If you want to exclude certain you can do this by specifying on the endpoint.
-
-``` csharp 
-/// endpoint: POST api/Users
-[ExcludeSwaggerResponse((int)HttpStatusCode.NotFound)]
-public IActionResult Get(int id)
-{
-}
 ```
         
 ## Global exception handling
