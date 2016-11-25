@@ -39,7 +39,7 @@ namespace Digipolis.Web.SampleApi.Controllers
         {
             int total;
             var values = _valueLogic.GetAll(queryOptions, out total);
-            var result = queryOptions.ToPagedResult(values, total, "Get", "Values", new { test = 0 });
+            var result = queryOptions.ToPagedResult(values, total, "Get", "Values");
             return Ok(result);
         }
 
@@ -49,8 +49,7 @@ namespace Digipolis.Web.SampleApi.Controllers
         /// <param name="id">The id of the value</param>
         /// <returns>A value object</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ValueDto), 200)]
-        [ProducesResponseType(typeof(ValueDto), 401)]
+        [ProducesDefaultResponses(200, SuccessResponseType = typeof(ValueDto))]
         [AllowAnonymous]
         [Versions(Versions.V1, Versions.V2)]
         public IActionResult Get(int id)
@@ -66,7 +65,7 @@ namespace Digipolis.Web.SampleApi.Controllers
         /// <returns>The created value object</returns>
         [HttpPost]
         [ValidateModelState]
-        [ProducesResponseType(typeof(ValueDto), 201)]
+        [ProducesDefaultResponses(201, SuccessResponseType = typeof(ValueDto))]
         [AllowAnonymous]
         [Versions(Versions.V1, Versions.V2)]
         public IActionResult Post([FromBody, Required] ValueDto value)
@@ -83,6 +82,7 @@ namespace Digipolis.Web.SampleApi.Controllers
         /// <returns></returns>
         [HttpPut("{id}")]
         [ValidateModelState]
+        [ProducesDefaultResponses(200, SuccessResponseType = typeof(ValueDto))]
         [Versions(Versions.V1, Versions.V2)]
         public IActionResult Put(int id, [FromBody, Required] ValueDto value)
         {
@@ -96,6 +96,7 @@ namespace Digipolis.Web.SampleApi.Controllers
         /// <param name="id">The value's Id</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [ProducesDefaultResponses(200, SuccessResponseType = typeof(ValueDto))]
         [Versions(Versions.V2)]
         public IActionResult Delete(int id)
         {

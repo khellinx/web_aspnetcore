@@ -8,7 +8,7 @@ namespace Digipolis.Web.SampleApi.Logic.Mapping
 {
     public class AutoMapperProfileConfiguration : Profile
     {
-        protected override void Configure()
+        public AutoMapperProfileConfiguration() : base(nameof(AutoMapperProfileConfiguration))
         {
             CreateMap<Value, ValueDto>().ReverseMap();
             CreateMap<ValueType, ValueTypeDto>().ReverseMap();

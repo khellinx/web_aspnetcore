@@ -4,20 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Digipolis.Errors;
 using Digipolis.Web.Api;
-using Digipolis.Web.Api.Conventions;
-using Digipolis.Web.Api.Filters;
-using Digipolis.Web.Api.JsonConverters;
 using Digipolis.Web.Api.Tools;
 using Digipolis.Web.Exceptions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 
 namespace Digipolis.Web
 {
