@@ -69,8 +69,7 @@ namespace Digipolis.Web
 
             builder.AddMvcOptions(options =>
             {
-                options.Filters.Insert(0, new ConsumesAttribute("application/json"));
-                options.Filters.Insert(1, new ProducesAttribute("application/json"));
+                options.Filters.Insert(0, new PagedResultAttribute());
             });
 
             builder.AddJsonOptions(x =>

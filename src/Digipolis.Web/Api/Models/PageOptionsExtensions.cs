@@ -16,7 +16,6 @@ namespace Digipolis.Web.Api.Models
             if (string.IsNullOrWhiteSpace(controllerName)) throw new ArgumentNullException(nameof(controllerName));
 
             var result = new PagedResult<T>(pageOptions, total, data, actionName, controllerName, routeValues);
-            result.GenerateLinks(null);
 
             return result;
         }
@@ -26,8 +25,6 @@ namespace Digipolis.Web.Api.Models
             if (string.IsNullOrWhiteSpace(routeName)) throw new ArgumentNullException(nameof(routeName));
 
             var result = new PagedResult<T>(pageOptions, total, data, routeName, routeValues);
-
-            result.GenerateLinks(null);
 
             return result;
         }

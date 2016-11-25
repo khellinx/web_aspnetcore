@@ -10,13 +10,21 @@ using System.Threading.Tasks;
 
 namespace Digipolis.Web.Api.Filters
 {
-    public class PagedResultFilter : IResultFilter
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, Inherited = true, AllowMultiple = false)]
+    public class PagedResultAttribute : Attribute, IFilterFactory
     {
-        public void OnResultExecuted(ResultExecutedContext context)
-        {
-        }
+        public bool IsReusable => false;
 
-        public void OnResultExecuting(ResultExecutingContext context)
+        public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
+        {
+            var filterInstance = new PagedResultFilter();
+            return filterInstance;
+        }
+    }
+
+    public class PagedResultFilter : ResultFilterAttribute
+    {
+        public override void OnResultExecuting(ResultExecutingContext context)
         {
             // Get the original result
             var result = context.Result as ObjectResult;

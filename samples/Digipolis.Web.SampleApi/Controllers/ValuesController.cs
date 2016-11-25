@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Digipolis.Web.Api.Models;
 using Digipolis.Web.Swagger;
 using Digipolis.Web.Api.ApiExplorer;
+using Digipolis.Web.Api.Filters;
 
 namespace Digipolis.Web.SampleApi.Controllers
 {
@@ -35,11 +36,12 @@ namespace Digipolis.Web.SampleApi.Controllers
         [ProducesDefaultResponses(200, SuccessResponseType = typeof(PagedResult<ValueDto>))]
         [AllowAnonymous]
         [Versions(Versions.V1, Versions.V2)]
+        [TypeFilter(typeof(PagedResultFilter))]
         public IActionResult Get([FromQuery]PageOptions queryOptions)
         {
             int total;
             var values = _valueLogic.GetAll(queryOptions, out total);
-            var result = queryOptions.ToPagedResult(values, total, "Get", "Values");
+            var result = new PagedResult<ValueDto>(queryOptions, total, values, "Get", "Values");
             return Ok(result);
         }
 
