@@ -29,7 +29,6 @@ namespace Digipolis.Web
             var httpContextAccessor = app.ApplicationServices.GetService<IActionContextAccessor>();
 
             if (settings?.Value?.DisableGlobalErrorHandling == false) app.UseMiddleware<ExceptionResponseMiddleware>();
-            if (httpContextAccessor != null) LinkProvider.Configure(httpContextAccessor);
         }
     }
 }

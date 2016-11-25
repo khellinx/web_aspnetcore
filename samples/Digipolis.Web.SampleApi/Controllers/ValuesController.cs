@@ -36,12 +36,11 @@ namespace Digipolis.Web.SampleApi.Controllers
         [ProducesDefaultResponses(200, SuccessResponseType = typeof(PagedResult<ValueDto>))]
         [AllowAnonymous]
         [Versions(Versions.V1, Versions.V2)]
-        [TypeFilter(typeof(PagedResultFilter))]
         public IActionResult Get([FromQuery]PageOptions queryOptions)
         {
             int total;
             var values = _valueLogic.GetAll(queryOptions, out total);
-            var result = new PagedResult<ValueDto>(queryOptions, total, values, "Get", "Values");
+            var result = new PagedResult<ValueDto>(queryOptions, total, values);
             return Ok(result);
         }
 

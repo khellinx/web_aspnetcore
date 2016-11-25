@@ -22,7 +22,7 @@ namespace Digipolis.Web.Api
         [JsonProperty(PropertyName = "_embedded")]
         public PagedResultEmbedded<T> Embedded { get; set; }
 
-        protected PagedResult(PageOptions pageOptions, int totalElements, IEnumerable<T> data)
+        public PagedResult(PageOptions pageOptions, int totalElements, IEnumerable<T> data)
         {
             if (pageOptions == null)
             {

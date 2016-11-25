@@ -8,23 +8,14 @@ namespace Digipolis.Web.Api.Tools
     // TODO: This shouldn't be a static class
     internal static class LinkProvider
     {
-        // This shouldn't be necessary but it is kept here to be backwards compatible.
-        private static IActionContextAccessor _httpContextAccessor;
-
-        internal static void Configure(IActionContextAccessor httpContextAccessor)
+        internal static Link GenerateLink(ActionContext actionContext, PageOptions pageOptions, int page, object routeValues = null)
         {
-            //TODO: add null check!
-            _httpContextAccessor = httpContextAccessor;
+            var routeName = actionContext.ActionDescriptor.AttributeRouteInfo.Name;
+            return GenerateLink(actionContext, pageOptions, page, routeName, routeValues);
         }
 
         internal static Link GenerateLink(ActionContext actionContext, PageOptions pageOptions, int page, string actionName, string controllerName, object routeValues = null)
         {
-            // This shouldn't be necessary but it is kept here to be backwards compatible.
-            if (actionContext == null)
-            {
-                actionContext = _httpContextAccessor.ActionContext;
-            }
-
             var values = GetRouteValues(pageOptions, page, routeValues);
 
             var url = AbsoluteAction(actionContext, actionName, controllerName, values);
@@ -33,12 +24,6 @@ namespace Digipolis.Web.Api.Tools
 
         internal static Link GenerateLink(ActionContext actionContext, PageOptions pageOptions, int page, string routeName, object routeValues = null)
         {
-            // This shouldn't be necessary but it is kept here to be backwards compatible.
-            if (actionContext == null)
-            {
-                actionContext = _httpContextAccessor.ActionContext;
-            }
-
             var values = GetRouteValues(pageOptions, page, routeValues);
 
             var url = AbsoluteRoute(actionContext, routeName, values);

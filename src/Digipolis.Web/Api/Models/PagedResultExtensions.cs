@@ -32,10 +32,14 @@ namespace Digipolis.Web.Api.Models
 
                 generateLinkFunc = (page) => LinkProvider.GenerateLink(actionContext, pageOptions, page, actionName, controllerName, routeValues);
             }
-            else
+            else if (!string.IsNullOrEmpty(links.RouteName))
             {
                 var routeName = links.RouteName;
                 generateLinkFunc = (page) => LinkProvider.GenerateLink(actionContext, pageOptions, page, routeName, routeValues);
+            }
+            else
+            {
+                generateLinkFunc = page => LinkProvider.GenerateLink(actionContext, pageOptions, page, routeValues);
             }
 
             links.First = generateLinkFunc(1);
