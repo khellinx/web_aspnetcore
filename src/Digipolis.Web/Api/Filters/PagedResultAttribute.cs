@@ -39,7 +39,7 @@ namespace Digipolis.Web.Api.Filters
                 }
 
                 // Only apply filter if the value is of type PagedResult
-                var valueType = result.Value.GetType().GetGenericTypeDefinition();
+                var valueType = result.Value.GetType();
                 var pagedResultTypeInfo = typeof(PagedResult).GetTypeInfo();
                 if (!pagedResultTypeInfo.IsAssignableFrom(valueType))
                 {
