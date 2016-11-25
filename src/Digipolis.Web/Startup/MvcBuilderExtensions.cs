@@ -69,7 +69,7 @@ namespace Digipolis.Web
 
             builder.AddMvcOptions(options =>
             {
-                options.Filters.Insert(0, new PagedResultAttribute());
+                options.Filters.Add(new PagedResultAttribute() { Order = 1000 });
             });
 
             builder.AddJsonOptions(x =>
