@@ -101,7 +101,6 @@ namespace Digipolis.Web.Swagger
             if (!operation.OperationId.Equals(operationId)) return;
             operation.Responses["200"].Schema = context.SchemaRegistry.GetOrRegister(typeof(AppVersion));
             operation.Summary = "Get the version of the application";
-            operation.Produces.Add("application/json");
         }
 
         private void ReplaceResponseDescriptionIfExists(Operation operation, int httpStatusCode, string description)
