@@ -24,6 +24,9 @@ namespace Digipolis.Web.Api.ApiExplorer
         {
             foreach (var apiDescription in context.Results)
             {
+                if (apiDescription.SupportedRequestFormats.Any(x => x.MediaType == "application/json"))
+                    continue;
+
                 apiDescription.SupportedRequestFormats.Add(new ApiRequestFormat()
                 {
                     Formatter = null,
