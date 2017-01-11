@@ -1,5 +1,5 @@
 {
-  "version": "3.1.5-sl-*",
+  "version": "3.1.6-sl-*",
   "description": "Web related tooling.",
   "authors": [ "digipolis.be" ],
   "packOptions": {

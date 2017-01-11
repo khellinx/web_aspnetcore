@@ -16,6 +16,8 @@ namespace Digipolis.Web.Versioning
         }
 
         [HttpGet("")]
+        [ProducesResponseType(typeof(AppVersion), 200)]
+        [ProducesResponseType(typeof(VersionError), 500)]
         public IActionResult Get()
         {
             try
@@ -24,7 +26,7 @@ namespace Digipolis.Web.Versioning
             }
             catch (Exception ex)
             {
-                var error = new Error(ex.Message);
+                var error = new VersionError(ex.Message);
                 return new ObjectResult(error) { StatusCode = 500 };
             }
         }
