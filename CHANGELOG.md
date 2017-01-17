@@ -30,5 +30,6 @@
 
 - Removed some Swagger functionality and replaced it with Api Description Providers, which is built-in functionality of MVC.
 - Updated PagedResult model so that custom Swagger filters are not required.
-- Added PagedResultFilter and added it to mvc filters
-- Added response types to status/version resource
+- Added PagedResultFilter and added it to mvc filters.
+- Added response types to status/version resource.
+- Updated Json.NET BaseContractResolver to not remove empty collections from the representation.

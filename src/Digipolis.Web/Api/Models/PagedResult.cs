@@ -31,7 +31,7 @@ namespace Digipolis.Web.Api
 
             Embedded = new PagedResultEmbedded<T>()
             {
-                Data = data ?? new List<T>()
+                Data = data
             };
             Page = new Page
             {

@@ -14,30 +14,8 @@ namespace Digipolis.Web.Api.JsonConverters
 
             Predicate<object> shouldSerialize = property.ShouldSerialize;
             property.ShouldSerialize =
-                obj => (shouldSerialize == null || shouldSerialize(obj)) && !IsEmptyCollection(property, obj);
+                obj => (shouldSerialize == null || shouldSerialize(obj)) && obj != null;
             return property;
-        }
-
-        private bool IsEmptyCollection(JsonProperty property, object target)
-        {
-            try
-            {
-                var value = property.ValueProvider.GetValue(target);
-                var collection = value as ICollection;
-                if (collection != null && collection.Count == 0)
-                    return true;
-
-                if (!typeof(IEnumerable).IsAssignableFrom(property.PropertyType))
-                    return false;
-
-                var countProp = property.PropertyType.GetProperty("Count");
-                var count = (int?) countProp?.GetValue(value, null);
-                return count == 0;
-            }
-            catch (Exception)
-            {
-                return true;
-            }
         }
     }
 }
