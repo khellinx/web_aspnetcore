@@ -33,3 +33,4 @@
 - Added PagedResultFilter and added it to mvc filters.
 - Added response types to status/version resource.
 - Updated Json.NET BaseContractResolver to not remove empty collections from the representation.
+- Updated Digipolis.Errors package to v4.0.0
